@@ -64,9 +64,9 @@
         android:id="@+id/registerButton"
         android:layout_width="218dp"
         android:layout_height="56dp"
+        android:layout_marginTop="16dp"
         android:text="@string/register"
-        tools:layout_editor_absoluteX="108dp"
-        tools:layout_editor_absoluteY="586dp"
-        />
+        app:layout_constraintStart_toStartOf="@+id/loginButton"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
