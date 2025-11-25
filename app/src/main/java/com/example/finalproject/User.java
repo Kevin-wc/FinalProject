@@ -4,6 +4,7 @@ public class User {
     private String username;
     private String password;
     private String email;
+    private int points;
 
     public User() {
     }
@@ -20,6 +21,10 @@ public class User {
         return email;
     }
 
+    public int getPoints() {
+        return points;
+    }
+
     public void setUserName(String username) {
         this.username = username;
     }
@@ -30,5 +35,9 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 }
