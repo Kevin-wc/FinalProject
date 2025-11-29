@@ -31,12 +31,12 @@
         app:layout_constraintTop_toBottomOf="@+id/welcomeMessage" />
 
     <EditText
-        android:id="@+id/userET"
+        android:id="@+id/emailET"
         android:layout_width="231dp"
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="108dp"
-        android:hint="@string/username"
+        android:hint="@string/email"
         app:layout_constraintStart_toStartOf="@+id/welcomeMessage"
         app:layout_constraintTop_toBottomOf="@+id/welcomeMessage" />
 
@@ -48,7 +48,7 @@
         android:layout_marginTop="12dp"
         android:hint="@string/password"
         app:layout_constraintStart_toStartOf="@+id/welcomeMessage"
-        app:layout_constraintTop_toBottomOf="@+id/userET" />
+        app:layout_constraintTop_toBottomOf="@+id/emailET" />
 
     <Button
         android:id="@+id/loginButton"
