@@ -2,6 +2,7 @@ package com.example.finalproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,8 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -21,8 +26,10 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordET;
     private Button loginBtn;
     private Button registerBtn;
-
     private FirebaseAuth auth;
+    private DatabaseReference ref;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
         loginBtn.setOnClickListener(login_onClick);
         registerBtn.setOnClickListener(register_onClick);
+
     }
 
     public View.OnClickListener login_onClick = new View.OnClickListener() {
@@ -62,8 +70,11 @@ public class LoginActivity extends AppCompatActivity {
             auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(LoginActivity.this, task -> {
                         if (task.isSuccessful()) {
-                            // go to main app
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            FirebaseUser user = auth.getCurrentUser();
+                            Log.d("LoginSuccess", user.getUid());
+                            SharedViewModel model = new ViewModelProvider(LoginActivity.this).get(SharedViewModel.class);
+                            intent.putExtra("userId", user.getUid());
                             startActivity(intent);
                             finish();
                         } else {
