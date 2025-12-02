@@ -15,7 +15,8 @@
             android:id="@+id/questionText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Leader Board"
+            android:textColor="@color/white"
+            android:text="Leaderboard"
             android:textSize="22sp"
             android:gravity="center"
             android:paddingBottom="12dp" />

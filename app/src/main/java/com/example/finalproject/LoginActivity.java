@@ -50,6 +50,10 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn = findViewById(R.id.loginButton);
         registerBtn = findViewById(R.id.registerButton);
 
+        emailET.setText("User@mail.com");
+        passwordET.setText("user123");
+
+
         loginBtn.setOnClickListener(login_onClick);
         registerBtn.setOnClickListener(register_onClick);
 
