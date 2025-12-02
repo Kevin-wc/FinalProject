@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/welcomeMessage"
+        android:layout_width="228dp"
+        android:layout_height="159dp"
+        android:text="@string/WelcomeMessage"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.208" />
+
+    <TextView
+        android:id="@+id/loginMessage"
+        android:layout_width="110dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/loginMessage"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/welcomeMessage"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeMessage" />
+
+    <EditText
+        android:id="@+id/emailET"
+        android:layout_width="231dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="108dp"
+        android:hint="@string/email"
+        app:layout_constraintStart_toStartOf="@+id/welcomeMessage"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeMessage" />
+
+    <EditText
+        android:id="@+id/passwordET"
+        android:layout_width="235dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:hint="@string/password"
+        app:layout_constraintStart_toStartOf="@+id/welcomeMessage"
+        app:layout_constraintTop_toBottomOf="@+id/emailET" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="214dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/login"
+        app:layout_constraintStart_toStartOf="@+id/passwordET"
+        app:layout_constraintTop_toBottomOf="@+id/passwordET" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="218dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/register"
+        app:layout_constraintStart_toStartOf="@+id/loginButton"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

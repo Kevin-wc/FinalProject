@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#12042B">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/profileUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#Boberson"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="32dp" />
+
+        <TextView
+            android:id="@+id/profileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bob Henderson"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#189 Daily rank   •   #79 Weekly rank"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Progress: 67%"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="16dp" />
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:progress="35"
+            android:max="100"
+            android:progressTint="#8900FD"
+            android:layout_marginTop="4dp"/>
+
+        <Button
+            android:id="@+id/editProfileBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile"
+            android:layout_marginTop="24dp" />
+
+    </LinearLayout>
+</ScrollView>
