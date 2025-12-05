@@ -3,6 +3,7 @@ package com.example.finalproject;
 public class User {
     private String username;
     private String password;
+    private String fullname;
     private String email;
     private int points;
 
@@ -11,6 +12,10 @@ public class User {
 
     public String getUserName() {
         return username;
+    }
+
+    public String getFullName() {
+        return fullname;
     }
 
     public String getPassword() {
@@ -31,6 +36,10 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public void setEmail(String email) {

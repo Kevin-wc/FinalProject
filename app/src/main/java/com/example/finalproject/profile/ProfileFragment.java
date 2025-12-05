@@ -11,10 +11,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.finalproject.R;
-import com.google.firebase.Firebase;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.finalproject.SharedViewModel;
+import com.example.finalproject.User;
 
 public class ProfileFragment extends Fragment {
     private ImageView profileImage;
@@ -22,8 +23,6 @@ public class ProfileFragment extends Fragment {
     private TextView realNameTV;
     private ListView settingsList;
     private Button editProfileB;
-    FirebaseAuth auth;
-    Firebase db;
 
     public ProfileFragment(){
 
@@ -41,35 +40,29 @@ public class ProfileFragment extends Fragment {
         settingsList = view.findViewById(R.id.settings_list);
         editProfileB = view.findViewById(R.id.edit_profile_btn);
 
-        auth = FirebaseAuth.getInstance();
-     //   db = FirebaseFirestore.getInstance();
 
-        loadUserInfo();
+
+        setupUserObserver();
         setupSettingsList();
         setupProfileImage();
         setupEditProfileButton();
         return view;
     }
 
-    private void loadUserInfo() {
-        // Gets the logged in user's ID
-        String uid = auth.getCurrentUser().getUid();
+    private void setupUserObserver() {
+        SharedViewModel model = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
-       // db.collection("users").document(uid).get()
-               // .addOnSuccessListener(doc -> {
-
-                  //  if (doc.exists()) {
-                      //  usernameTV.setText(doc.getString("username"));
-                      //  realNameTV.setText(doc.getString("fullname"));
-                        // Load profile image if it exists
-                       // String img = doc.getString("profileImageUrl");
-                      //  if (img != null && !img.isEmpty()) {
-                            // Glide efficiently loads image from a URL into an ImageView
-                            //Glide.with(this).load(img).into(profileImage);
-                      //  }
-                   // }
-              //  });
+        model.getUser().observe(getViewLifecycleOwner(), user -> {
+            if (user != null) {
+                usernameTV.setText("@" + user.getUserName());
+                realNameTV.setText(user.getFullName());
+            } else {
+                usernameTV.setText("@Unknown User");
+                realNameTV.setText("No name");
+            }
+        });
     }
+
 
         // Creates a list of settings using a custom adapter.
         // We use a ListView because it supports rows with icons and text.
