@@ -76,6 +76,7 @@ public class ProfileFragment extends Fragment {
         // We use a ListView because it supports rows with icons and text.
         // The custom adapter allows us to control exactly how the row looks.
     private void setupSettingsList() {
+        // For the purpose of this class, only these will added. (Subject to change).
         String[] items = {"Personal", "Notifications", "Friends"};
         // Corresponding icons that haven't been added yet.
         //int[] icons = {R.drawable.ic_user, R.drawable.ic_bell, R.drawable.ic_friends};
