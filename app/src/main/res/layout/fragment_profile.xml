@@ -17,7 +17,6 @@
             android:layout_gravity="center"
             android:src="@mipmap/ic_launcher_round"
             android:scaleType="centerCrop"
-            android:background=""
             android:padding="2dp" />
 
         <!-- Username -->

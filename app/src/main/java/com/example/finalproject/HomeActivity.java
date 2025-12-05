@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.finalproject.databinding.ActivityHomeBinding;
+import com.example.finalproject.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -30,7 +31,7 @@ public class HomeActivity extends AppCompatActivity {
 
         navView = findViewById(R.id.bottomNav);
         Fragment homeNavFragment = new HomeNavFragment();
-        Fragment profileNavFragment = new ProfileNavFragment();
+        Fragment profileFragment = new ProfileFragment();
         Fragment leaderboardFragment = new LeaderboardFragment();
 
         Intent intent = getIntent();
@@ -48,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
             } else if (id == R.id.leaderboard) {
                 setCurrentFragment(leaderboardFragment);
             } else if (id == R.id.profile) {
-                setCurrentFragment(profileNavFragment);
+                setCurrentFragment(profileFragment);
             }
             return true;
         });
