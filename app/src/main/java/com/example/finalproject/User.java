@@ -6,19 +6,19 @@ public class User {
     private String fullName;
     private String email;
     // Using URL to the profile image stored in our database
-    private String profileImageUrl;
+    private String profileImageBase64;
     private int points;
 
     public User() {
     }
 
     public User(String userName, String password, String fullName, String email,
-                String profileImageUrl, int points) {
+                String profileImageBase64, int points) {
         this.userName = userName;
         this.password = password;
         this.fullName = fullName;
         this.email = email;
-        this.profileImageUrl = profileImageUrl;
+        this.profileImageBase64 = profileImageBase64;
         this.points = points;
     }
 
@@ -36,8 +36,8 @@ public class User {
     public String getEmail() {
         return email;
     }
-    public String getProfileImageUrl() {
-        return profileImageUrl;
+    public String getProfileImageBase64() {
+        return profileImageBase64;
     }
 
     public int getPoints() {
@@ -61,8 +61,8 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-    public void setProfileImageUrl(String profileImageUrl) {
-        this.profileImageUrl = profileImageUrl;
+    public void setProfileImageUrl(String profileImageBase64) {
+        this.profileImageBase64 = profileImageBase64;
     }
 
     public void setPoints(int points) {

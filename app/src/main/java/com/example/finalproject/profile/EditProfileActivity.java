@@ -6,17 +6,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Base64;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.finalproject.R;
@@ -24,9 +22,12 @@ import com.example.finalproject.SharedViewModel;
 import com.example.finalproject.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.io.InputStream;
 
 public class EditProfileActivity extends AppCompatActivity {
 
@@ -37,7 +38,6 @@ public class EditProfileActivity extends AppCompatActivity {
     private Button saveB;
 
     private Uri selectedImageUri = null;
-
     private SharedViewModel model;
 
     private final ActivityResultLauncher<Intent> galleryLauncher =
@@ -66,7 +66,7 @@ public class EditProfileActivity extends AppCompatActivity {
             if (user != null) {
                 editUsername.setText(user.getUserName());
                 editFullName.setText(user.getFullName());
-                loadCurrentProfilePicture(user);
+                loadCurrentProfilePicture(user.getProfileImageBase64());
             }
         });
         changePicB.setOnClickListener(v -> openGallery());
@@ -79,37 +79,62 @@ public class EditProfileActivity extends AppCompatActivity {
         galleryLauncher.launch(intent);
     }
 
-    private void loadCurrentProfilePicture(User user) {
-        if (user.getProfileImageUrl() == null || user.getProfileImageUrl().isEmpty()){
+    private void loadCurrentProfilePicture(String base64) {
+        if (base64 == null || base64.isEmpty()) {
+            profileImage.setImageResource(R.mipmap.ic_launcher_round);
             return;
         }
-        StorageReference imgRef = FirebaseStorage.getInstance()
-                .getReferenceFromUrl(user.getProfileImageUrl());
 
-        final long MAX_SIZE = 300 * 1024;
+        try {
+            byte[] bytes = Base64.decode(base64, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            profileImage.setImageBitmap(bitmap);
+        } catch (Exception e){
+            // Don't know what to put here, HI DR. PARRA
+        }
+    }
 
-        imgRef.getBytes(MAX_SIZE)
-                .addOnSuccessListener(bytes -> {
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                    profileImage.setImageBitmap(bitmap);
-                });
+    // Transform to Base64 from Uri because selecting a picture from the gallery provides URI
+    private String uriToBase64(Uri uri) {
+        try {
+            InputStream input = getContentResolver().openInputStream(uri);
+            byte[] bytes = input.readAllBytes();
+            return Base64.encodeToString(bytes, Base64.DEFAULT);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     private void saveChanges() {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-
-        String newUsername = editUsername.getText().toString().trim();
-        String newFullName = editFullName.getText().toString().trim();
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(uid);
 
         User currentUser = model.getUser().getValue();
         if (currentUser == null) {
             Toast.makeText(this, "Error: user data not loaded", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        String newUsername = editUsername.getText().toString().trim();
+        String newFullName = editFullName.getText().toString().trim();
+        String newImageBase64;
+        if (selectedImageUri != null) {
+            newImageBase64 = uriToBase64(selectedImageUri);
+        } else {
+            newImageBase64 = null;
+        }
         String oldUsername = currentUser.getUserName();
         String oldFullName = currentUser.getFullName();
+        String oldImageBase64 = currentUser.getProfileImageBase64();
+
+        boolean sameUsername = newUsername.equals(oldUsername);
+        boolean sameName = newFullName.equals(oldFullName) || newFullName.isEmpty();
+        boolean samePicture = (selectedImageUri == null);
+
+        if (sameUsername && sameName && samePicture) {
+            finish();
+            return;
+        }
+
 
         // Username Error Handling
 
@@ -133,21 +158,9 @@ public class EditProfileActivity extends AppCompatActivity {
             return;
         }
 
-        // If no changes were made. EX. only changed pfp
-        boolean sameUsername = newUsername.equals(oldUsername);
-        boolean sameName = newFullName.isEmpty() || newFullName.equals(oldFullName);
-        boolean samePicture = (selectedImageUri == null);
-
-        if (sameUsername && sameName && samePicture) {
-            finish();
-            return;
-        }
         // If username didn't change
         if (sameUsername) {
-            updateRealName(uid, newFullName, oldFullName);
-            uploadPicture(uid);
-            Toast.makeText(this, "Profile updated!", Toast.LENGTH_SHORT).show();
-            finish();
+            updateProfile(userRef, newFullName, oldFullName, newImageBase64);
             return;
         }
 
@@ -169,61 +182,29 @@ public class EditProfileActivity extends AppCompatActivity {
 
                     if (taken) {
                         Toast.makeText(this, "Username already taken!", Toast.LENGTH_SHORT).show();
+                        editUsername.setError("Username already taken");
                         return;
                     }
-                    FirebaseDatabase.getInstance().getReference("Users")
-                            .child(uid)
-                            .child("userName")
-                            .setValue(newUsername)
-                            .addOnFailureListener(e ->
-                                    Toast.makeText(this, "Failed to update username", Toast.LENGTH_SHORT).show());
 
-
-                    updateRealName(uid, newFullName, oldFullName);
-                    uploadPicture(uid);
-
-                    Toast.makeText(this, "Profile updated!", Toast.LENGTH_SHORT).show();
-                    finish();
+                    userRef.child("userName").setValue(newUsername);
+                    updateProfile(userRef,newFullName, oldFullName, newImageBase64);
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Error checking usernames", Toast.LENGTH_SHORT).show();
                 });
     }
 
-    private void updateRealName(String uid, String newName, String oldName) {
-
+    private void updateProfile(DatabaseReference ref, String newName,
+                               String oldName, String newImageBase64) {
         if (!newName.isEmpty() && !newName.equals(oldName)) {
-            FirebaseDatabase.getInstance().getReference("Users")
-                    .child(uid)
-                    .child("fullName")
-                    .setValue(newName);
+            ref.child("fullName").setValue(newName);
+        }
+        if (newImageBase64 != null){
+            ref.child("profileImageBase64").setValue(newImageBase64);
+        }
+
+        Toast.makeText(this, "Profile updated!", Toast.LENGTH_SHORT).show();
+        finish();
         }
     }
 
-    private void uploadPicture(String uid) {
-        if (selectedImageUri == null){
-            return;
-        }
-
-        StorageReference ref = FirebaseStorage.getInstance()
-                .getReference("profileImages/" + uid + ".jpg");
-
-        ref.putFile(selectedImageUri)
-                .addOnSuccessListener(task ->
-                        ref.getDownloadUrl().addOnSuccessListener(uri ->
-                                FirebaseDatabase.getInstance().getReference("Users")
-                                        .child(uid)
-                                        .child("profileImageUrl")
-                                        .setValue(uri.toString())
-                                        .addOnFailureListener(e ->
-                                                Toast.makeText(this, "Failed to update picture URL", Toast.LENGTH_SHORT).show()
-                                        )
-                        ).addOnFailureListener(e ->
-                                Toast.makeText(this, "Failed to get uploaded image URL", Toast.LENGTH_SHORT).show()
-                        )
-                )
-                .addOnFailureListener(e ->
-                        Toast.makeText(this, "Failed to upload picture", Toast.LENGTH_SHORT).show()
-                );
-    }
-}

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +64,7 @@ public class ProfileFragment extends Fragment {
             if (user != null) {
                 usernameTV.setText("@" + user.getUserName());
                 realNameTV.setText(user.getFullName());
-                loadProfilePicture(user);
+                loadProfilePicture(user.getProfileImageBase64());
             } else {
                 usernameTV.setText("@Unknown User");
                 realNameTV.setText("No name");
@@ -71,10 +72,25 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    // load the stored profile picture from Firebase Storage.
+    private void loadProfilePicture(String base64) {
+        if (base64 == null || base64.isEmpty()) {
+            profileImage.setImageResource(R.mipmap.ic_launcher_round);
+            return;
+        }
 
-        // Creates a list of settings using a custom adapter.
-        // We use a ListView because it supports rows with icons and text.
-        // The custom adapter allows us to control exactly how the row looks.
+        try {
+            byte[] bytes = Base64.decode(base64, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            profileImage.setImageBitmap(bitmap);
+        } catch (Exception e) {
+            profileImage.setImageResource(R.mipmap.ic_launcher_round);
+        }
+    }
+
+    // Creates a list of settings using a custom adapter.
+    // We use a ListView because it supports rows with icons and text.
+    // The custom adapter allows us to control exactly how the row looks.
     private void setupSettingsList() {
         // For the purpose of this class, only these will added. (Subject to change).
         String[] items = {"Personal", "Notifications", "Friends"};
@@ -88,28 +104,6 @@ public class ProfileFragment extends Fragment {
             if (position == 0) startActivity(new Intent(getActivity(), PersonalActivity.class));
             if (position == 1) startActivity(new Intent(getActivity(), NotificationActivity.class));
             if (position == 2) startActivity(new Intent(getActivity(), FriendsActivity.class));
-        });
-    }
-    // load the stored profile picture from Firebase Storage.
-    private void loadProfilePicture(User user) {
-        if (user.getProfileImageUrl() == null || user.getProfileImageUrl().isEmpty()) {
-            // No image available
-            return;
-        }
-        // Using Storage Reference dependency make a reference to the stored image using its URL
-        // From the database
-        StorageReference imgRef = FirebaseStorage.getInstance().
-                getReferenceFromUrl(user.getProfileImageUrl());
-        // To avoid memory issues and problems, we want to make image be (300 KB) ONLY.
-        final long MAX_SIZE = 300* 1024;
-
-        imgRef.getBytes(MAX_SIZE).addOnSuccessListener(bytes -> {
-            // Convert downloaded bytes into a Bitmap
-            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-            profileImage.setImageBitmap(bitmap);
-        }).addOnFailureListener(e -> {
-            // If it fails, then we just use this default one as a placeholder
-            profileImage.setImageResource(R.mipmap.ic_launcher_round);
         });
     }
     // Navigates to Edit Profile screen where the user can actually edit their info
