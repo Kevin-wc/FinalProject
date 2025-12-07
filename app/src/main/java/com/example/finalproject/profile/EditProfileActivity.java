@@ -90,7 +90,7 @@ public class EditProfileActivity extends AppCompatActivity {
             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             profileImage.setImageBitmap(bitmap);
         } catch (Exception e){
-            // Don't know what to put here, HI DR. PARRA
+            Toast.makeText(this, "Failed to load picture", Toast.LENGTH_SHORT).show();
         }
     }
 
