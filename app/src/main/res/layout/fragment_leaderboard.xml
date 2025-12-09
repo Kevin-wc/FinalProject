@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text="Leaderboard"
+            android:text="@string/questionText"
             android:textSize="22sp"
             android:gravity="center"
             android:paddingBottom="12dp" />

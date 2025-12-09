@@ -20,7 +20,7 @@
                 android:id="@+id/tabToday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Today"
+                android:text="@string/home_nav_today"
                 android:textStyle="bold"
                 android:textColor="@android:color/white" />
 
@@ -29,14 +29,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="Community"
+                android:text="@string/home_nav_community"
                 android:textColor="#B0B0B0" />
 
             <TextView
                 android:id="@+id/rulesBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rules"
+                android:text="@string/home_nav_rules"
                 android:textColor="@android:color/white"
                 android:layout_weight="1"
                 android:gravity="end" />
@@ -46,7 +46,7 @@
             android:id="@+id/homeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Today’s\nChallenges"
+            android:text="@string/home_nav_todays_challenges"
             android:textSize="26sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"
@@ -56,7 +56,7 @@
             android:id="@+id/homeSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hey Bob, welcome back!"
+            android:text="@string/home_nav_welcome_back"
             android:textColor="@android:color/white"
             android:layout_marginTop="4dp" />
 
@@ -73,7 +73,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Quote of the Day"
+                android:text="@string/home_nav_quote_of_the_day"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="8dp"/>
@@ -82,7 +82,7 @@
                 android:id="@+id/quoteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="The best way to predict the future is to create it."
+                android:text="@string/home_nav_quote_text"
                 android:textSize="14sp"
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="4dp"/>
@@ -91,7 +91,7 @@
                 android:id="@+id/authorTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="- Abraham Lincoln"
+                android:text="@string/home_nav_quote_author"
                 android:textSize="12sp"
                 android:textStyle="italic"
                 android:gravity="end"
@@ -119,7 +119,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Exploring Options"
+                android:text="@string/home_nav_exploring_options"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:layout_marginTop="8dp" />
@@ -127,7 +127,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Use the info tab to find new alternatives instead of vaping."
+                android:text="@string/home_nav_exploring_options_subtitle"
                 android:textSize="12sp"
                 android:textColor="@android:color/white" />
         </LinearLayout>
@@ -135,7 +135,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Game Genre"
+            android:text="@string/home_nav_game_genre"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:layout_marginTop="24dp" />
@@ -159,12 +159,12 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:padding="8dp"
-                    android:layout_marginEnd="8dp">
+                    android.layout_marginEnd="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Social"
+                        android:text="@string/home_nav_genre_social"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -178,12 +178,12 @@
                     android:padding="8dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:layout_marginEnd="8dp">
+                    android.layout_marginEnd="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Financial"
+                        android:text="@string/home_nav_genre_financial"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
                 </LinearLayout>

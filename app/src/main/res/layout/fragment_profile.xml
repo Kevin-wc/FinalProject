@@ -35,7 +35,7 @@
         <!-- Real Name -->
         <TextView
             android:id="@+id/realname_text"
-            android:text="Ericka Anderson"
+            android:text="@string/profile_real_name"
             android:textSize="16sp"
             android:gravity="center"
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
                     android:id="@+id/follow_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:text="@string/profile_follow_count"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"/>
@@ -69,7 +69,7 @@
                     android:id="@+id/follow_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Follow"
+                    android:text="@string/profile_follow_label"
                     android:textColor="@android:color/white"/>
             </LinearLayout>
 
@@ -83,7 +83,7 @@
                     android:id="@+id/following_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:text="@string/profile_following_count"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"/>
@@ -92,7 +92,7 @@
                     android:id="@+id/following_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Following"
+                    android:text="@string/profile_following_label"
                     android:textColor="@android:color/white"/>
             </LinearLayout>
 
@@ -106,7 +106,7 @@
                     android:id="@+id/friend_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:text="@string/profile_friend_count"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"/>
@@ -115,7 +115,7 @@
                     android:id="@+id/friend_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Friends"
+                    android:text="@string/profile_friends_label"
                     android:textColor="@android:color/white"/>
             </LinearLayout>
         </LinearLayout>
@@ -123,7 +123,7 @@
         <!-- Rank -->
         <TextView
             android:id="@+id/rank_daily"
-            android:text="#189 Daily Rank"
+            android:text="@string/profile_daily_rank"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
 
         <TextView
             android:id="@+id/rank_weekly"
-            android:text="#79 Weekly Rank"
+            android:text="@string/profile_weekly_rank"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -153,7 +153,7 @@
         <!-- Edit Profile Button -->
         <Button
             android:id="@+id/edit_profile_btn"
-            android:text="Edit Profile"
+            android:text="@string/profile_edit_profile_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/defaultC"

@@ -14,7 +14,7 @@
             android:id="@+id/genreTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quiz Battle"
+            android:text="@string/genreTitle"
             android:textColor="@android:color/white"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -23,7 +23,7 @@
             android:id="@+id/lobbyCodeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your lobby code: 0000"
+            android:text="@string/lobbyCodeText"
             android:textColor="@android:color/white"
             android:layout_marginTop="8dp" />
 
@@ -31,13 +31,14 @@
             android:id="@+id/createLobbyBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create Lobby"
+            android:text="@string/createLobbyBtn"
             android:layout_marginTop="16dp" />
 
         <TextView
+            android:id="@+id/joinFriendTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Or join a friend's lobby:"
+            android:text="@string/joinFriendTv"
             android:textColor="@android:color/white"
             android:layout_marginTop="24dp" />
 
@@ -52,14 +53,14 @@
             android:id="@+id/joinLobbyBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Join Lobby"
+            android:text="@string/joinLobbyBtn"
             android:layout_marginTop="8dp" />
 
         <TextView
             android:id="@+id/statusText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No lobby joined."
+            android:text="@string/statusText"
             android:textColor="@android:color/white"
             android:layout_marginTop="16dp" />
 
@@ -67,7 +68,7 @@
             android:id="@+id/startGameBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Start Game"
+            android:text="@string/startGameBtn"
             android:layout_marginTop="24dp" />
     </LinearLayout>
 </ScrollView>

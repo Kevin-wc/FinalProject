@@ -38,7 +38,7 @@ public class LeaderboardFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_leaderboard, container, false);
 
         TextView title = v.findViewById(R.id.questionText);
-        title.setText("Leader Board");
+
 
         ListView listView = v.findViewById(R.id.answersList);
         adapter = new ArrayAdapter<>(requireContext(),

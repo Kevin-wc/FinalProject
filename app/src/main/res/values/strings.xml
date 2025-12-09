@@ -33,6 +33,48 @@
     <string name="emailEtHint">Enter Email</string>
     <string name="passwordEtHint">New Password</string>
     <string name="confirmPassEtHint">Confirm Password</string>
+    <!--Strings used for game lobby fragment -->
+    <string name="genreTitle">Quiz Battle</string>
+    <string name="lobbyCodeText">Your lobby code: 0000</string>
+    <string name="createLobbyBtn">Create Lobby</string>
+    <string name="joinFriendTv">Or join a friend\'s lobby\:</string>
+    <string name="joinCodeInput">Enter lobby code</string>
+    <string name="joinLobbyBtn">Join Lobby</string>
+    <string name="statusText">Status\: </string>
+    <string name="startGameBtn">Start Game</string>
+    <!--Strings used for home navigation fragment -->
+    <string name="home_nav_today">Today</string>
+    <string name="home_nav_community">Community</string>
+    <string name="home_nav_rules">Rules</string>
+    <string name="home_nav_todays_challenges">Today’s\nChallenges</string>
+    <string name="home_nav_welcome_back">Hey Bob, welcome back!</string>
+    <string name="home_nav_quote_of_the_day">Quote of the Day</string>
+    <string name="home_nav_quote_text">The best way to predict the future is to create it.</string>
+    <string name="home_nav_quote_author">- Abraham Lincoln</string>
+    <string name="home_nav_exploring_options">Exploring Options</string>
+    <string name="home_nav_exploring_options_subtitle">Use the info tab to find new alternatives instead of vaping.</string>
+    <string name="home_nav_game_genre">Game Genre</string>
+    <string name="home_nav_genre_social">Social</string>
+    <string name="home_nav_genre_financial">Financial</string>
+    <!--Strings used for leaderboard fragment -->
+    <string name="questionText">Leaderboard</string>
+    <!--Strings used for profile fragment -->
+    <string name="profile_real_name">Ericka Anderson</string>
+    <string name="profile_follow_count">0</string>
+    <string name="profile_follow_label">Follow</string>
+    <string name="profile_following_count">0</string>
+    <string name="profile_following_label">Following</string>
+    <string name="profile_friend_count">0</string>
+    <string name="profile_friends_label">Friends</string>
+    <string name="profile_daily_rank">#189 Daily Rank</string>
+    <string name="profile_weekly_rank">#79 Weekly Rank</string>
+    <string name="profile_edit_profile_button">Edit Profile</string>
+    <!--Strings used for edit profile activity -->
+    <string name="edit_profile_change_picture">Change Picture</string>
+    <string name="edit_profile_username_hint">Username</string>
+    <string name="edit_profile_full_name_hint">Full Name</string>
+    <string name="edit_profile_save_changes">Save Changes</string>
+
 
 
     <string name="lorem_ipsum">
@@ -73,7 +115,5 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    "
+
 </resources>
-
-
