@@ -27,7 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginBtn;
     private Button registerBtn;
     private FirebaseAuth auth;
-    private DatabaseReference ref;
+    private Button forgotPasswordBtn;
+
 
 
 
@@ -49,6 +50,8 @@ public class LoginActivity extends AppCompatActivity {
         passwordET = findViewById(R.id.passwordET);
         loginBtn = findViewById(R.id.loginButton);
         registerBtn = findViewById(R.id.registerButton);
+        forgotPasswordBtn = findViewById(R.id.forgotPasswordButton);
+
 
         emailET.setText("User@mail.com");
         passwordET.setText("user123");
@@ -56,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 
         loginBtn.setOnClickListener(login_onClick);
         registerBtn.setOnClickListener(register_onClick);
+        forgotPasswordBtn.setOnClickListener(forgotBtn_onClick);
 
     }
 
@@ -94,6 +98,15 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        }
+    };
+
+    public View.OnClickListener forgotBtn_onClick = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
             startActivity(intent);
         }
     };
