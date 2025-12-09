@@ -61,14 +61,17 @@
             android:layout_marginTop="4dp" />
 
         <LinearLayout
-            android:id="@+id/mainChallengeCard"
+            android:id="@+id/cardExploringOptions"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginTop="16dp"
             android:orientation="vertical"
             android:background="#1F0A3C"
-            android:padding="12dp">
+            android:padding="12dp"
+            android:clickable="true"
+            android:focusable="true">
 
+            <!-- We need an image team -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -110,10 +113,13 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/cardGenreSocial"
                     android:layout_width="150dp"
                     android:layout_height="100dp"
                     android:background="#1F0A3C"
                     android:orientation="vertical"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:padding="8dp"
                     android:layout_marginEnd="8dp">
 
@@ -126,11 +132,14 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/cardGenreFinancial"
                     android:layout_width="150dp"
                     android:layout_height="100dp"
                     android:background="#1F0A3C"
                     android:orientation="vertical"
                     android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:layout_marginEnd="8dp">
 
                     <TextView

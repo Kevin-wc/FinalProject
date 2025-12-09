@@ -14,10 +14,37 @@ import androidx.lifecycle.ViewModelProvider;
 
 public class HomeNavFragment extends Fragment {
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_nav, container, false);
-        }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_home_nav, container, false);
+
+        View card = v.findViewById(R.id.cardExploringOptions);
+        View socialCard = v.findViewById(R.id.cardGenreSocial);
+        View financialCard = v.findViewById(R.id.cardGenreFinancial);
+
+
+        card.setOnClickListener(view -> {
+            if (getActivity() instanceof HomeActivity) {
+                ((HomeActivity) getActivity())
+                        .openArticleScreen("exploring_options");
+            }
+        });
+
+        socialCard.setOnClickListener(view -> {
+            if (getActivity() instanceof HomeActivity) {
+                ((HomeActivity) getActivity()).openGameLobby("Social");
+            }
+        });
+
+        financialCard.setOnClickListener(view -> {
+            if (getActivity() instanceof HomeActivity) {
+                ((HomeActivity) getActivity()).openGameLobby("Financial");
+            }
+        });
+
+        return v;
+
+}
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- ArrayAdapter uses android.R.layout.simple_list_item_1, which has a dark grey textColor -->
+<!-- I couldn't see the text smh-->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/leaderText"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:textColor="@android:color/white"
+    android:textSize="16sp" />

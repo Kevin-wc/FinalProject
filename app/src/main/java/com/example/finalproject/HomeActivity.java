@@ -60,4 +60,33 @@ public class HomeActivity extends AppCompatActivity {
     public void setCurrentFragment(Fragment fragment){
         getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, fragment).commit();
     }
+
+    public void openArticleScreen(String articleId) {
+        Fragment fragment = ArticleFragment.newInstance(articleId);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.flFragment, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void openQuizScreen(String articleId) {
+        Fragment fragment = com.example.finalproject.QuizFragment.newInstance(articleId);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.flFragment, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void openGameLobby(String genre) {
+        Fragment f = GameLobbyFragment.newInstance(genre);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.flFragment, f)
+                .addToBackStack(null)
+                .commit();
+    }
+
+
 }
