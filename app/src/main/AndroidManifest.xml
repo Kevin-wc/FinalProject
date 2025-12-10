@@ -14,7 +14,10 @@
         <activity
             android:name=".ForgotPasswordActivity"
             android:exported="false" />
-        <activity android:name=".profile.EditProfileActivity" />
+        <activity
+            android:name=".profile.EditProfileActivity" />
+        <activity
+            android:name=".profile.FriendsActivity" />
         <activity
             android:name=".HomeActivity"
             android:exported="false"

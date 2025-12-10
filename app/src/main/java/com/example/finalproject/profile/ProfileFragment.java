@@ -28,7 +28,7 @@ public class ProfileFragment extends Fragment {
     private TextView realNameTV;
     private ListView settingsList;
     private Button editProfileB;
-
+    // Empty public constructor required for fragments
     public ProfileFragment(){
 
     }
@@ -56,25 +56,45 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
-    // Observer changes in the SharedViewModel. When database is updated, UI updates.
+    /**
+     * setupUserObserver()
+     *
+     * The SharedViewModel stores the currently logged-in user's information.
+     * Because it uses LiveData, this Fragment automatically receives updates
+     * whenever user data is changed in Firebase.
+     *
+     */
     private void setupUserObserver() {
         SharedViewModel model = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
         model.getUser().observe(getViewLifecycleOwner(), user -> {
             if (user != null) {
+                // Update username & full name
                 usernameTV.setText("@" + user.getUserName());
                 realNameTV.setText(user.getFullName());
+                // Load Base64 profile image into ImageView
                 loadProfilePicture(user.getProfileImageBase64());
             } else {
+                // Fallback text if user object is null
                 usernameTV.setText("@Unknown User");
                 realNameTV.setText("No name");
             }
         });
     }
 
-    // load the stored profile picture from Firebase Storage.
+    /**
+     * Converts a Base64-encoded profile image string into a Bitmap.
+     * We switched to Base64 (instead of Firebase Storage URLs)
+     * because it avoids Firebase billing and simplifies loading.
+     *
+     * Steps:
+     * 1. Decode Base64 string to byte array
+     * 2. Convert bytes to Bitmap
+     * 3. Display in ImageView
+     */
     private void loadProfilePicture(String base64) {
         if (base64 == null || base64.isEmpty()) {
+            // Default placeholder image
             profileImage.setImageResource(R.mipmap.ic_launcher_round);
             return;
         }
@@ -84,21 +104,32 @@ public class ProfileFragment extends Fragment {
             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             profileImage.setImageBitmap(bitmap);
         } catch (Exception e) {
+            // If something goes wrong, show default image
             profileImage.setImageResource(R.mipmap.ic_launcher_round);
         }
     }
 
-    // Creates a list of settings using a custom adapter.
-    // We use a ListView because it supports rows with icons and text.
-    // The custom adapter allows us to control exactly how the row looks.
+    /**
+     * Creates a simple settings menu with 3 items using a ListView
+     * Items:
+     *  - Personal
+     *  - Notifications
+     *  - Friends
+     * SettingsAdapter is a custom adapter that allows us to show icons + text
+     * together in each row.
+     */
     private void setupSettingsList() {
-        // For the purpose of this class, only these will added. (Subject to change).
+        // Titles for each menu item
         String[] items = {"Personal", "Notifications", "Friends"};
-        // Corresponding icons that haven't been added yet.
+        // Corresponding icons (stored in /res/drawable)
         int[] icons = {R.drawable.ic_user, R.drawable.ic_notifications, R.drawable.ic_friends};
-
+        // Custom adapter inflates the row layout for each item
         SettingsAdapter adapter = new SettingsAdapter(requireContext(), items, icons);
         settingsList.setAdapter(adapter);
+        /**
+         * ListView navigation:
+         * Clicking a row launches a specific activity.
+         */
 
         settingsList.setOnItemClickListener((parent, view, position, id) -> {
             if (position == 0) startActivity(new Intent(getActivity(), PersonalActivity.class));
@@ -106,7 +137,12 @@ public class ProfileFragment extends Fragment {
             if (position == 2) startActivity(new Intent(getActivity(), FriendsActivity.class));
         });
     }
-    // Navigates to Edit Profile screen where the user can actually edit their info
+    /**
+     * Opens the EditProfileActivity where the user can:
+     * - Change username
+     * - Change full name
+     * - Upload a new profile picture
+     */
     private void setupEditProfileButton() {
         editProfileB.setOnClickListener(v ->
                 startActivity(new Intent(getActivity(), EditProfileActivity.class))

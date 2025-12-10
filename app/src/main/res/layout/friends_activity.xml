@@ -1,0 +1,117 @@
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#12042B"
+    >
+    <!-- DISCLAIMER -->
+    <!-- I named the Strings resources as "Hint" however this was only for timesake. -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/friends_title"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:paddingBottom="10dp"
+            android:textColor="@android:color/white"/>
+
+        <!-- Search Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_for_users"
+            android:textSize="18sp"
+            android:paddingTop="10dp"
+            android:textColor="@android:color/white"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="8dp">
+
+            <EditText
+                android:id="@+id/searchET"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_username"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:background="@android:drawable/edit_text"
+                android:textColor="#000"
+                android:textColorHint="#888"/>
+
+            <Button
+                android:id="@+id/searchBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/sendRequestBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send_friend_request"
+            android:visibility="gone"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"/>
+
+        <!-- Friends List -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/friends"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="20dp"
+            android:textColor="@android:color/white"/>
+
+        <ListView
+            android:id="@+id/friendsList"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:dividerHeight="1dp"
+            android:background="#f2f2f2"/>
+
+        <!-- Incoming Requests -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/friend_request"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="20dp"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/requestHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/request"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"
+            android:paddingBottom="8dp"
+            />
+
+        <ListView
+            android:id="@+id/requestsList"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:dividerHeight="1dp"
+            android:background="#f7f7f7"/>
+
+    </LinearLayout>
+
+</ScrollView>

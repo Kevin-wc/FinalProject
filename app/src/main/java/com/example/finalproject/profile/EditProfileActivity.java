@@ -37,9 +37,16 @@ public class EditProfileActivity extends AppCompatActivity {
     private Button changePicB;
     private Button saveB;
 
+    // URI that points to the image the user picked from the gallery
     private Uri selectedImageUri = null;
     private SharedViewModel model;
-
+    /**
+     * ActivityResultLauncher replaces the old "startActivityForResult" method.
+     * It safely receives data BACK from another app, like the device gallery.
+     *
+     * When the user selects a picture, this callback runs automatically,
+     * giving us the image's URI so we can show it + convert it to Base64.
+     */
     private final ActivityResultLauncher<Intent> galleryLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result ->{
                 if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
@@ -78,9 +85,13 @@ public class EditProfileActivity extends AppCompatActivity {
         intent.setType("image/*");
         galleryLauncher.launch(intent);
     }
-
+    /**
+     * Loads a Base64-encoded profile picture.
+     * Base64 means the image is stored as text, not a file, inside Firebase.
+     */
     private void loadCurrentProfilePicture(String base64) {
         if (base64 == null || base64.isEmpty()) {
+            // Default picture if the user has no custom image
             profileImage.setImageResource(R.mipmap.ic_launcher_round);
             return;
         }
@@ -93,8 +104,10 @@ public class EditProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "Failed to load picture", Toast.LENGTH_SHORT).show();
         }
     }
-
-    // Transform to Base64 from Uri because selecting a picture from the gallery provides URI
+    /**
+     * Converts the selected gallery image (URI) to raw bytes, and finally to Base64 text string.
+     * Firebase Realtime Database cannot store files, so this method converts it.
+     */
     private String uriToBase64(Uri uri) {
         try {
             InputStream input = getContentResolver().openInputStream(uri);
@@ -104,39 +117,50 @@ public class EditProfileActivity extends AppCompatActivity {
             return null;
         }
     }
-
+    /**
+     * Validates profile input, checks username availability,
+     * and updates Firebase with new username/fullname/profile picture.
+     */
     private void saveChanges() {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(uid);
-
+        // Get user data from SharedViewModel
         User currentUser = model.getUser().getValue();
         if (currentUser == null) {
             Toast.makeText(this, "Error: user data not loaded", Toast.LENGTH_SHORT).show();
             return;
         }
+        // Get updated user input
         String newUsername = editUsername.getText().toString().trim();
         String newFullName = editFullName.getText().toString().trim();
         String newImageBase64;
+        // Convert picture to Base64 if the user selected a new one
         if (selectedImageUri != null) {
             newImageBase64 = uriToBase64(selectedImageUri);
         } else {
             newImageBase64 = null;
         }
+        // Old values for comparison
         String oldUsername = currentUser.getUserName();
         String oldFullName = currentUser.getFullName();
         String oldImageBase64 = currentUser.getProfileImageBase64();
-
+        // Check if the user actually changed anything
         boolean sameUsername = newUsername.equals(oldUsername);
         boolean sameName = newFullName.equals(oldFullName) || newFullName.isEmpty();
         boolean samePicture = (selectedImageUri == null);
 
         if (sameUsername && sameName && samePicture) {
+            // No actual changes → nothing to update
             finish();
             return;
         }
 
 
-        // Username Error Handling
+
+        /**
+         * Username validation — this prevents invalid usernames.
+         * These rules are similar to Twitter/Instagram.
+         */
 
         if (newUsername.isEmpty()) {
             Toast.makeText(this, "Username cannot be empty!", Toast.LENGTH_SHORT).show();
@@ -158,20 +182,24 @@ public class EditProfileActivity extends AppCompatActivity {
             return;
         }
 
-        // If username didn't change
+        // If username is unchanged, skip availability check
         if (sameUsername) {
             updateProfile(userRef, newFullName, oldFullName, newImageBase64);
             return;
         }
 
-        // Check if username IS being changed, we check to see if the username already exists
+        /**
+         * Username *did* change → check if another user already has it.
+         * This loops through every user in Firebase.
+         * This is asynchronous — it runs later, not instantly.
+         */
         FirebaseDatabase.getInstance().getReference("Users")
                 .get()
                 .addOnSuccessListener(snapshot -> {
                     boolean taken = false;
-
+                    // Loop through all users
                     for (DataSnapshot child : snapshot.getChildren()) {
-                        if (!child.getKey().equals(uid)) {
+                        if (!child.getKey().equals(uid)) {  // don't compare with yourself (was a former problem)
                             String existing = child.child("userName").getValue(String.class);
                             if (newUsername.equalsIgnoreCase(existing)) {
                                 taken = true;
@@ -181,11 +209,12 @@ public class EditProfileActivity extends AppCompatActivity {
                     }
 
                     if (taken) {
+                        // Username already exists, reject
                         Toast.makeText(this, "Username already taken!", Toast.LENGTH_SHORT).show();
                         editUsername.setError("Username already taken");
                         return;
                     }
-
+                    // Username is available, save and update
                     userRef.child("userName").setValue(newUsername);
                     updateProfile(userRef,newFullName, oldFullName, newImageBase64);
                 })
@@ -194,11 +223,17 @@ public class EditProfileActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Updates full name + picture.
+     * This is called both when username changes AND when it stays the same.
+     */
     private void updateProfile(DatabaseReference ref, String newName,
                                String oldName, String newImageBase64) {
+        // Update full name only if user typed something different
         if (!newName.isEmpty() && !newName.equals(oldName)) {
             ref.child("fullName").setValue(newName);
         }
+        // Save new Base64 profile picture if user selected one
         if (newImageBase64 != null){
             ref.child("profileImageBase64").setValue(newImageBase64);
         }

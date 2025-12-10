@@ -136,5 +136,13 @@
     <string name="home">Home</string>
     <string name="board">Board</string>
     <string name="profile">Profile</string>
+    <!-- Friends Activtiy strings -->
+    <string name="request">Tap a request to accept it</string>
+    <string name="friend_request">Incoming Friend Requests</string>
+    <string name="friends">Your Friends</string>
+    <string name="friends_title">Friends</string>
+    <string name="search_for_users">Search for users</string>
+    <string name="enter_username">Enter username</string>
+    <string name="send_friend_request">Send Friend Request</string>
 
 </resources>
