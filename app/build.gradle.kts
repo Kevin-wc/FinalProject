@@ -28,7 +28,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         // Make the API key available in the BuildConfig class
-        buildConfigField("String", "NINJA_API_KEY", localProperties.getProperty("NINJA_API_KEY", ""))
+        buildConfigField("String", "NINJA_API_KEY", "\"${localProperties.getProperty("NINJA_API_KEY", "QyNuzNklQ4ZGM1oqRW1SlA==Nup68lsFmLCyBjci")}\"")
     }
 
     buildTypes {

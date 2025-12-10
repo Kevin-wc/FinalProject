@@ -11,7 +11,7 @@
         android:padding="16dp">
 
         <TextView
-            android:text="Quick Quiz"
+            android:text="@string/quick_quiz"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="1. Why is vaping still risky?"
+            android:text="@string/_1_why_is_vaping_still_risky"
             android:textColor="@android:color/white"
             android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
@@ -34,26 +34,26 @@
                 android:id="@+id/q1_opt1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Because it has no nicotine."
+                android:text="@string/because_it_has_no_nicotine"
                 android:textColor="@android:color/white" />
 
             <RadioButton
                 android:id="@+id/q1_opt2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Because it can still cause addiction and lung issues."
+                android:text="@string/because_it_can_still_cause_addiction_and_lung_issues"
                 android:textColor="@android:color/white" />
 
             <RadioButton
                 android:id="@+id/q1_opt3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Because it is more expensive than cigarettes."
+                android:text="@string/because_it_is_more_expensive_than_cigarettes"
                 android:textColor="@android:color/white" />
         </RadioGroup>
 
         <TextView
-            android:text="2. Which of these is a healthy alternative mentioned?"
+            android:text="@string/_2_which_of_these_is_a_healthy_alternative_mentioned"
             android:textColor="@android:color/white"
             android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
@@ -68,26 +68,26 @@
                 android:id="@+id/q2_opt1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Switching to another nicotine product."
+                android:text="@string/switching_to_another_nicotine_product"
                 android:textColor="@android:color/white"/>
 
             <RadioButton
                 android:id="@+id/q2_opt2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ignoring cravings until they go away."
+                android:text="@string/ignoring_cravings_until_they_go_away"
                 android:textColor="@android:color/white"/>
 
             <RadioButton
                 android:id="@+id/q2_opt3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Exercise and new hobbies."
+                android:text="@string/exercise_and_new_hobbies"
                 android:textColor="@android:color/white"/>
         </RadioGroup>
 
         <TextView
-            android:text="3. What role can friends or community play?"
+            android:text="@string/_3_what_role_can_friends_or_community_play"
             android:textColor="@android:color/white"
             android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
@@ -102,21 +102,21 @@
                 android:id="@+id/q3_opt1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Providing support and accountability."
+                android:text="@string/providing_support_and_accountability"
                 android:textColor="@android:color/white"/>
 
             <RadioButton
                 android:id="@+id/q3_opt2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Buying more vape devices."
+                android:text="@string/buying_more_vape_devices"
                 android:textColor="@android:color/white"/>
 
             <RadioButton
                 android:id="@+id/q3_opt3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="They have no impact."
+                android:text="@string/they_have_no_impact"
                 android:textColor="@android:color/white"/>
         </RadioGroup>
 
@@ -124,7 +124,7 @@
             android:id="@+id/submitQuizBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Submit Quiz"
+            android:text="@string/submit_quiz"
             android:backgroundTint="#8900FD"
             android:textColor="@android:color/white"
             android:layout_marginTop="16dp"/>

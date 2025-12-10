@@ -14,7 +14,7 @@
             android:id="@+id/articleTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Article Title"
+            android:text="@string/article_title"
             android:textColor="@android:color/white"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -30,7 +30,7 @@
             android:id="@+id/takeQuizBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Take Quiz"
+            android:text="@string/take_quiz"
             android:layout_marginTop="24dp"
             android:backgroundTint="#8900FD"
             android:textColor="@android:color/white"/>
