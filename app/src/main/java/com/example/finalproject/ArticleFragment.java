@@ -27,9 +27,8 @@ public class ArticleFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (getArguments() != null)
             articleId = getArguments().getString(ARG_ARTICLE_ID);
-        }
     }
 
     @Nullable
@@ -44,15 +43,9 @@ public class ArticleFragment extends Fragment {
         TextView bodyTV = v.findViewById(R.id.articleBody);
         Button quizBtn = v.findViewById(R.id.takeQuizBtn);
 
-        // later you can switch on articleId; for now just this one
-        titleTV.setText("Exploring Options: Alternatives to Vaping");
-        bodyTV.setText(
-                "Vaping may seem like a safer choice than smoking, but it still " +
-                        "carries health risks and can create strong nicotine dependence.\n\n" +
-                        "This article explores practical alternatives such as exercise, " +
-                        "breathing exercises, social support, and hobbies that can help " +
-                        "manage stress and cravings without nicotine."
-        );
+        // Load article content from resources (no hard-coding)
+        titleTV.setText(R.string.article_title_exploring);
+        bodyTV.setText(R.string.article_body_exploring);
 
         quizBtn.setOnClickListener(view -> {
             if (getActivity() instanceof HomeActivity) {

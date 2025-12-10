@@ -145,4 +145,27 @@
     <string name="enter_username">Enter username</string>
     <string name="send_friend_request">Send Friend Request</string>
 
+    <string name="article_title_exploring">
+        Exploring Options: Alternatives to Vaping
+    </string>
+
+    <!-- Strings used for fragments for Article -->
+
+    <string name="article_body_exploring">
+        Vaping may seem like a safer choice than smoking, but it still carries
+        health risks and can create strong nicotine dependence.\n\n
+        This article explores practical alternatives such as exercise, breathing
+        exercises, social support, and hobbies that can help manage stress and
+        cravings without nicotine.
+    </string>
+    <string name="quiz_battle">" Quiz Battle"</string>
+    <string name="your_lobby_code">"Your lobby code: "</string>
+    <string name="waiting_for_friend_to_join">Waiting for friend to join...</string>
+    <string name="joined_lobby_with_friend">Joined lobby with friend!</string>
+    <string name="code_not_found_demo_only">Code not found. (Demo only)</string>
+    <string name="hey_bob_welcome_back">Hey Bob, welcome back!</string>
+    <string name="hey_s_welcome_back">Hey %s, welcome back!</string>
+    <string name="user_mail_com">User@mail.com</string>
+    <string name="user123">user123</string>
+
 </resources>

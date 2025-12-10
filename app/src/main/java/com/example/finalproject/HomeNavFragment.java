@@ -59,9 +59,9 @@ public class HomeNavFragment extends Fragment {
         SharedViewModel model = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         model.getUser().observe(getViewLifecycleOwner(), user -> {
             if (user != null) {
-                homeSubtitle.setText("Hey " + user.getUserName() + ", welcome back!");
+                homeSubtitle.setText(String.format(getString(R.string.hey_s_welcome_back), user.getUserName()));
                     } else {
-                        homeSubtitle.setText("Hey Bob, welcome back!");
+                        homeSubtitle.setText(R.string.hey_bob_welcome_back);
                     }
         });
 

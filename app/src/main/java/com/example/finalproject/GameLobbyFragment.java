@@ -49,21 +49,21 @@ public class GameLobbyFragment extends Fragment {
         Button joinBtn = v.findViewById(R.id.joinLobbyBtn);
         Button startBtn = v.findViewById(R.id.startGameBtn);
 
-        genreTitle.setText(genre + " Quiz Battle");
+        genreTitle.setText(String.format("%s%s", genre, getString(R.string.quiz_battle)));
 
         String fakeCode = "4821";
-        lobbyCodeText.setText("Your lobby code: " + fakeCode);
+        lobbyCodeText.setText(String.format("%s%s", getString(R.string.your_lobby_code), fakeCode));
 
         createBtn.setOnClickListener(view -> {
-            statusText.setText("Waiting for friend to join...");
+            statusText.setText(R.string.waiting_for_friend_to_join);
         });
 
         joinBtn.setOnClickListener(view -> {
             String entered = joinCodeInput.getText().toString().trim();
             if (entered.equals(fakeCode)) {
-                statusText.setText("Joined lobby with friend!");
+                statusText.setText(R.string.joined_lobby_with_friend);
             } else {
-                statusText.setText("Code not found. (Demo only)");
+                statusText.setText(R.string.code_not_found_demo_only);
             }
         });
 

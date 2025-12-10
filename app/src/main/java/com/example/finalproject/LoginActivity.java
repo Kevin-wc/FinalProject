@@ -53,8 +53,8 @@ public class LoginActivity extends AppCompatActivity {
         forgotPasswordBtn = findViewById(R.id.forgotPasswordButton);
 
 
-        emailET.setText("User@mail.com");
-        passwordET.setText("user123");
+        emailET.setText(R.string.user_mail_com);
+        passwordET.setText(R.string.user123);
 
 
         loginBtn.setOnClickListener(login_onClick);
